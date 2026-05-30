@@ -1,0 +1,64 @@
+\lhead{3. Knuth-Morris-Pratt (KMP) Algorithm}
+
+\begin{enumerate}[label=\textbf{\Alph*.}]
+
+\item \textbf{What is the KMP algorithm? State its main advantage over Brute Force
+matching}
+
+The Knuth-Morris-Pratt (KMP) Algorithm is an efficient pattern matching technique
+that searches for a pattern within a text using previously matched information.
+
+Instead of restarting comparisons after every mismatch, KMP intelligently decides
+where to continue searching.
+
+\textbf{Main Advantage}
+
+It avoids repeated comparisons and performs pattern matching in $O(n + m)$ time,
+making it much faster than Brute Force for large inputs.
+
+\item \textbf{Explain the Prefix Function ($\Pi$ table) in KMP.}
+
+The Prefix Function, also called the {\bfseries $\Pi$ Table or LPS (Longest
+Prefix Suffix) Table}, stores the length of the longest proper prefix that is
+also a suffix for each position in the pattern.
+
+This information helps the algorithm decide how far the pattern should be shifted
+when a mismatch occurs.
+
+As a result, already matched characters do not need to be compared again.
+
+\item \textbf{Describe how KMP avoids unnecessary comparisons during pattern searching.}
+
+When a mismatch occurs, KMP does not move back to the beginning of the pattern.
+Instead, it uses the values stored in the Prefix Table to determine the next comparison.
+This saves time because characters that have already matched are not checked repeatedly.
+Therefore, the searching process becomes much more efficient.
+
+\item \textbf{Construct the Prefix Table for the following pattern and explain the process:\\
+Pattern: ABABCABAB}
+
+\begin{tabular}{|c|c|c|}
+\hline
+Position & Character & Value\\
+\hline
+0 & A & 0\\
+1 & B & 0\\
+2 & A & 1\\
+3 & B & 2\\
+4 & C & 0\\
+5 & A & 1\\
+6 & B & 2\\
+7 & A & 3\\
+8 & B & 4\\
+\hline
+\end{tabular}
+
+\textbf{Final Prefix Table}: 0 0 1 2 0 1 2 3 4
+
+\end{enumerate}
+
+\begin{center}
+\vspace{1cm}
+$\ast \ast \ast$
+\end{center}
+\newpage
