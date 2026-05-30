@@ -1,0 +1,20 @@
+\documentclass[12pt,a4paper]{article}
+
+\input{preamble}
+
+\begin{document}
+  \input{cover}
+
+  \pagestyle{fancy}
+  \fancyhf{}
+
+  \input{index}
+
+  \setcounter{page}{1}
+  \rhead{Page \thepage}
+
+  \input{sections/brute_force}
+  \input{sections/boyer_moore}
+  \input{sections/kmp}
+  \input{sections/tries}
+\end{document}
