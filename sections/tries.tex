@@ -33,6 +33,91 @@ Used to verify whether a word exists in a dictionary.
 \end{enumerate}
 
 \item \textbf{Explain insertion and searching operations in a Trie with suitable examples.}
+Insertion Operation in a Trie
+Insertion is the process of storing a word in the Trie. Each character of the word is inserted one by one as a separate node. If a character already exists in the Trie, it is reused instead of creating a new node. The last character of the word is marked as the end of the word.
+Example: Insert the words BOOK, BOOT, and BALL
+Step 1: Insert "BOOK"
+
+Root
+  |
+  B
+  |
+  O
+  |
+  O
+  |
+  K
+  Step 2: Insert "BOOT"
+The characters B → O → O already exist. Only T is added.
+
+Root
+  |
+  B
+  |
+  O
+  |
+  O
+ / \
+K* T*
+
+Step 3: Insert "BALL"
+The character B already exists, but A does not. Create a new branch.
+
+Root
+                |
+                B
+              /   \
+             O     A
+             |     |
+             O     L
+           /   \   |
+         K*    T*  L*
+(* denotes the end of a word)
+
+Algorithm for Insertion:
+
+1. Start from the root node.
+
+2. Read the first character of the word.
+
+3. If the character node exists, move to it.
+
+4. Otherwise, create a new node.
+
+5. Repeat the process for all characters.
+
+6. Mark the last node as the end of the word.
+
+Searching Operation in a Trie
+Searching is used to determine whether a particular word is stored in the Trie.
+The search follows the path of the word character by character. If every character is found and the final node is marked as an end node, the word exists in the Trie.
+
+Example 1: Search "BOOT"
+
+Root → B → O → O → T*
+All characters are present and T is marked as the end of a word.
+Result: BOOT is found in the Trie.
+
+Example 2: Search "BOY"
+
+Root → B → O
+After O, there is no node for Y.
+Result: BOY is not present in the Trie.
+
+Example 3: Search "BOO"
+
+Root → B → O → O
+The path exists, but the last O is not marked as the end of a word.
+Result: BOO is only a prefix, not a complete word stored in the Trie.
+
+Algorithm for Searching
+1.Start from the root node.
+2.Compare each character of the word with the corresponding Trie node.
+3.Move to the next node if the character exists.
+If any character is missing, return Not Found.
+4.After the last character, check the end-of-word marker.
+5.If marked, return Found; otherwise, return Not Found.
+
 
 
 
