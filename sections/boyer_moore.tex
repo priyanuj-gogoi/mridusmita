@@ -1,0 +1,133 @@
+\lhead{2. Boyer-Moore Algorithm}
+
+\begin{enumerate}[label=\textbf{\Alph*.}]
+
+\item \textbf{Define the Boyer-Moore algorithm. Why is it considered efficient for pattern
+matching?}
+
+The Boyer-Moore Algorithm is a powerful string matching algorithm used to search a pattern
+inside a text. Unlike the Brute Force approach, it starts comparing characters from the
+\textbf{rightmost side of the pattern}.
+
+Whenever a mismatch occurs, it uses special rules to shift the pattern by multiple
+positions instead of moving only one position at a time.
+
+This makes the algorithm much faster and more efficient for large texts because many
+unnecessary comparisons are avoided.
+
+\item \textbf{Explain the following heuristics used in Boyer-Moore:\\
+a) Bad Character Rule\\
+b) Good Suffix Rule}
+
+Heuristics used in Boyer-Moore:
+
+\textbf{a) Bad Character Rule}
+
+The Bad Character Rule is applied whenever a mismatch occurs.
+
+If the mismatched text character appears somewhere earlier in the pattern,
+the pattern is shifted so that both occurrences align.
+
+If the mismatched character does not exist in the pattern,
+the pattern is shifted completely beyond that character.
+
+\textbf{Example:}\\
+Text = ABCDXEF\\
+Pattern = CDE
+
+The character \textbf{X} causes a mismatch and is not present in the pattern.
+
+Therefore, the pattern can be shifted several positions forward.
+
+This reduces unnecessary comparisons.
+
+\textbf{b) Good Suffix Rule}
+
+The Good Suffix Rule is used when a portion of the pattern has already matched
+successfully.
+
+Instead of starting again, the algorithm looks for another occurrence of the
+matched suffix within the pattern.
+
+The pattern is then shifted accordingly.
+
+This allows the algorithm to reuse previously matched information and improves\\
+performance.
+
+\item \textbf{Differentiate between Brute Force and Boyer-Moore algorithms.}
+
+\begin{center}
+\begin{tabular}{|c|>{\raggedright\arraybackslash}p{5.8cm}|>{\raggedright\arraybackslash}p{5.8cm}|}
+\hline
+& \centering\arraybackslash \textbf{Brute Force} & \centering\arraybackslash \textbf{Boyer-Moore}\\
+\hline
+1. & Compares from left to right & Compares from right to left\\
+2. & Checks every position & Skips multiple position\\
+3. & Shifts one position at a time & Uses larger shifts\\
+4. & Easy to implement & Comparatively complex\\
+5. & No optimization used & Uses optimization heuristics\\
+\hline
+\end{tabular}
+\end{center}
+
+\item \textbf{Apply Boyer-Moore Pattern Matching for the following:\\
+\begin{tabular}{@{}rl@{}}
+\quad Text: & THIS IS A TEST TEXT\\
+\quad Pattern: & TEST
+\end{tabular}
+\\
+Show the pattern shifts step by step.}
+
+\textbf{Shift 1}
+
+\begin{verbatim}
+THIS IS A TEST TEXT
+TEST
+\end{verbatim}
+
+Mismatch occurs.\\
+Shift the pattern.
+
+\textbf{Shift 2}
+
+\begin{verbatim}
+THIS IS A TEST TEXT
+ TEST
+\end{verbatim}
+
+Mismatch occurs again.\\
+Shift further.
+
+\textbf{Shift 3}
+
+\begin{verbatim}
+THIS IS A TEST TEXT
+      TEST
+\end{verbatim}
+
+Mismatch occurs.\\
+Shift ahead.
+
+\textbf{Final Shift}
+
+\begin{verbatim}
+THIS IS A TEST TEXT
+          TEST
+\end{verbatim}
+
+Comparison from right to left:\\
+T = T $\checkmark$\\
+S = S $\checkmark$\\
+E = E $\checkmark$\\
+T = T $\checkmark$
+
+All characters match.\\
+Therefore, the pattern \textbf{TEST} is found at position \textbf{10}.
+
+\end{enumerate}
+
+\begin{center}
+\vspace{1cm}
+$\ast \ast \ast$
+\end{center}
+\newpage
