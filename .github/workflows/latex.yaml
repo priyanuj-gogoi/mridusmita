@@ -12,7 +12,7 @@ jobs:
         with:
           root_file: main.tex
           os: debian
-          args: -auxdir=build_aux -output=build_pdf
+          args: -auxdir=build_aux -outdir=build_pdf
       - name: Upload artifact
         uses: actions/upload-artifact@v6
         with:
