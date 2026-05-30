@@ -18,7 +18,3 @@ jobs:
         with:
           name: PDF
           path: build_pdf/main.pdf
-      - name: Publish release
-        uses: softprops/action-gh-release@v3
-        with:
-          files: build_pdf/main.pdf
