@@ -1,0 +1,259 @@
+\lhead{1. Brute Force Pattern Matching}
+
+\begin{enumerate}[label=\textbf{\Alph*.}]
+
+\item \textbf{Write the best-case and worst-case time complexities of the Brute
+Force algorithm. Explain both cases briefly.}
+
+The Brute Force Pattern Matching algorithm is one of the simplest string
+matching techniques. It compares the pattern with the text character by
+character at every possible position until a match is found or the entire
+text has been checked.
+
+Let:
+\begin{itemize}
+\item {\bfseries n = Length of the text}
+\item {\bfseries m = Length of the pattern}
+\end{itemize}
+\vspace{0.5\baselineskip}
+
+{\large\bfseries Best-Case Time Complexity: $O(n)$}
+
+The best case occurs when the first character of the pattern does not match
+the current text character. In such situations, only one comparison is needed
+at each position before moving to the next position.
+
+{\bfseries Example:}\\
+\begin{tabular}{@{}rl@{}}
+Text = & "ABCDEFGH"\\
+Pattern = & "PQR"
+\end{tabular}
+
+Since the first character itself mismatches at every position, the algorithm
+performs approximately \textbf{n} comparisons.
+
+Therefore, the best-case complexity is $O(n)$.
+\vspace{0.5\baselineskip}
+
+{\large\bfseries Worst-Case Time Complexity: $O(nm)$}
+
+The worst case occurs when most characters match successfully, but a mismatch
+happens near the end of the pattern. As a result, the algorithm repeatedly
+performs many comparisons at different positions.
+
+{\bfseries Example:}\\
+\begin{tabular}{@{}rl@{}}
+Text = & "CCCCCCCCCC"\\
+Pattern = & "CCCCD"
+\end{tabular}
+
+At every position, several characters match before the final mismatch occurs.
+This increases the total number of comparisons significantly.
+
+Therefore, the worst-case complexity is $O(nm)$.
+
+\item \textbf{Explain the step-by-step working of the algorithm using a
+suitable example.}
+
+Consider:\par
+\begin{tabular}{@{}rl@{}}
+\textbf{Text} = & \textbf{COMPUTERBOOK}\\
+\textbf{Pattern} = & \textbf{BOOK}
+\end{tabular}
+
+\vspace{0.5\baselineskip}
+
+\textbf{Step 1: Start Comparison}\\
+The algorithm begins by comparing the pattern with the text from the first position.
+
+\begin{center}
+\begin{NiceTabular}{c|cccccccccccc}
+Text & C & O & M & P & U & T & E & R & B & O & O & K\\
+Pattern & B & O & O & K
+\CodeAfter
+\tikz{
+\draw[rounded corners, thick, draw=red]
+($(1-2.north west)+(-2pt,2pt)$)
+rectangle
+($(2-2.south east)+(2pt,-2pt)$);
+}\end{NiceTabular}
+\end{center}
+
+Since C $\neq$ B, the pattern is shifted one position to the right.
+\newpage
+
+\textbf{Step 2: Shift the Pattern}
+
+\begin{center}
+\begin{NiceTabular}{c|cccccccccccc}
+Text & C & O & M & P & U & T & E & R & B & O & O & K\\
+Pattern & & B & O & O & K
+\CodeAfter
+\tikz{
+\draw[rounded corners, thick, draw=red]
+($(1-3.north west)+(-2pt,2pt)$)
+rectangle
+($(2-3.south east)+(2pt,-2pt)$);
+}\end{NiceTabular}
+\end{center}
+
+Again, the first character does not match.\\
+The pattern is shifted further.
+
+\textbf{Step 3: Continue Comparing}
+
+The algorithm keeps moving the pattern one position at a time and compares the\\
+characters. Whenever a mismatch occurs, the current comparison stops and the
+pattern is shifted to the next position.
+
+\textbf{Step 4: Successful Match}
+
+After several shifts:
+
+\begin{center}
+\begin{NiceTabular}{c|cccccccccccc}
+Text & C & O & M & P & U & T & E & R & B & O & O & K\\
+Pattern & &&&&&&&& B & O & O & K
+\CodeAfter
+\tikz{
+\draw[rounded corners, thick, draw=customgreen]
+($(1-10.north west)+(-2pt,2pt)$)
+rectangle
+($(2-13.south east)+(2pt,-2pt)$);
+}
+\end{NiceTabular}
+\end{center}
+
+Now all characters match:\\
+B = B $\checkmark$\\
+O = O $\checkmark$\\
+O = O $\checkmark$\\
+K = K $\checkmark$
+
+Since every character matches successfully, the pattern \textbf{BOOK} is found in the text.
+
+\textbf{Result:} The pattern \textbf{BOOK} occurs starting at position \textbf{8} of the text.
+
+\item \textbf{Perform Brute Force Pattern Matching for the following:\\
+\begin{tabular}{@{}rl@{}}
+\quad Text: & AABAACAADAABAABA\\
+\quad Pattern: & AABA
+\end{tabular}
+\\
+Show all comparisons clearly.}
+
+Given,
+
+\begin{tabular}{@{}rl@{}}
+Text: & AABAACAADAABAABA\\
+Pattern: & AABA
+\end{tabular}
+
+\textbf{1. Position 0}
+
+\begin{center}
+\begin{NiceTabular}{c|cccccccccccccccc}
+Text & A & A & B & A & A & C & A & A & D & A & A & B & A & A & B & A \\
+Pattern & A & A & B & A
+\CodeAfter
+\tikz \draw[rounded corners, thick, draw=customgreen]
+($(1-2.north west)+(-2pt,2pt)$)
+rectangle
+($(2-5.south east)+(2pt,-2pt)$);
+\end{NiceTabular}
+\end{center}
+
+All characters match.\\
+\textbf{Pattern found at Position 0.}
+
+\textbf{2. Position 1}
+
+\begin{center}
+\begin{NiceTabular}{c|cccccccccccccccc}
+Text & A & A & B & A & A & C & A & A & D & A & A & B & A & A & B & A \\
+Pattern & & A & A & B & A
+\CodeAfter
+\tikz{
+\draw[rounded corners, thick, draw=customgreen]
+($(1-3.north west)+(-2pt,2pt)$)
+rectangle
+($(2-3.south east)+(2pt,-2pt)$);
+
+\draw[rounded corners, thick, draw=red]
+($(1-4.north west)+(-2pt,2pt)$)
+rectangle
+($(2-4.south east)+(2pt,-2pt)$);
+}\end{NiceTabular}
+\end{center}
+
+First character matches but the next character mismatches.\\
+Move to the next position.
+\newpage
+
+\textbf{3. Position 2}
+
+\begin{center}
+\begin{NiceTabular}{c|cccccccccccccccc}
+Text & A & A & B & A & A & C & A & A & D & A & A & B & A & A & B & A\\
+Pattern & & & A & A & B & A
+\CodeAfter
+\tikz{
+\draw[rounded corners, thick, draw=red]
+($(1-4.north west)+(-2pt,2pt)$)
+rectangle
+($(2-4.south east)+(2pt,-2pt)$);
+}\end{NiceTabular}
+\end{center}
+
+Mismatch occurs immediately.\\
+Move ahead.
+
+\textbf{4. Continue the Same Process}\\
+The algorithm continues checking all possible positions one by one.
+
+\textbf{5. Position 9}
+
+\begin{center}
+\begin{NiceTabular}{c|cccccccccccccccc}
+Text & A & A & B & A & A & C & A & A & D & A & A & B & A & A & B & A \\
+Pattern & & & & & & & & & & A & A & B & A
+\CodeAfter
+\tikz{
+\draw[rounded corners, thick, draw=customgreen]
+($(1-11.north west)+(-2pt,2pt)$)
+rectangle
+($(2-14.south east)+(2pt,-2pt)$);
+}\end{NiceTabular}
+\end{center}
+
+All characters match.\\
+\textbf{Pattern found at Position 9.}
+
+\textbf{6. Position 12}
+
+\begin{center}
+\begin{NiceTabular}{c|cccccccccccccccc}
+Text & A & A & B & A & A & C & A & A & D & A & A & B & A & A & B & A \\
+Pattern & & & & & & & & & & & & & A & A & B & A
+\CodeAfter
+\tikz{
+\draw[rounded corners, thick, draw=customgreen]
+($(1-14.north west)+(-2pt,2pt)$)
+rectangle
+($(2-17.south east)+(2pt,-2pt)$);
+}\end{NiceTabular}
+\end{center}
+
+Again, all characters match.\\
+\textbf{Pattern found at Position 12.}
+
+\textbf{Final Result:} The pattern AABA occurs at:
+\textbf{Position 0, Position 9, and Position 12}
+
+\end{enumerate}
+
+\begin{center}
+\vspace{1cm}
+$\ast \ast \ast$
+\end{center}
+\newpage
