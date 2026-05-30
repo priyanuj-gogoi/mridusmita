@@ -1,0 +1,24 @@
+name: Build LaTeX document
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Setup LaTeX and build document
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: main.tex
+          os: debian
+          args: -auxdir=build_aux -output=build_pdf
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: PDF
+          path: build_pdf/main.pdf
+      - name: Publish release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: build_pdf/main.pdf
